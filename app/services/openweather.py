@@ -2,6 +2,7 @@ import requests
 from .cache import cache
 from ..core.config import settings
 
+
 class OpenWeatherService:
     def __init__(self):
         self.endpoint = 'https://api.openweathermap.org/data/2.5/weather'
