@@ -26,7 +26,7 @@ class OpenWeatherService:
 
         response = requests.get(url)
 
-        response_json.raise_for_status()
+        response.raise_for_status()
 
         response_json = response.json()
 
