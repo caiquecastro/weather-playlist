@@ -3,7 +3,7 @@ from ..core.config import settings
 
 class Cache:
     def __init__(self):
-        self.redis = redis.Redis(host=settings.CACHE_HOST)
+        self.redis = redis.from_url(settings.REDIS_URL)
 
     def get(self, key):
         return self.redis.get(key)

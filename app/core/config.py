@@ -4,9 +4,7 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     PROJECT_NAME = 'Weather Playlist'
 
-    CACHE_HOST: str
-    CACHE_PORT: int
-    CACHE_DB: int
+    REDIS_URL: str
 
     OPENWEATHER_API_KEY: str
     OPENWEATHER_UNITS: str
