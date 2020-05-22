@@ -1,6 +1,7 @@
 import spotipy
 import requests
 from fastapi import FastAPI
+from core.config import settings
 from spotipy.oauth2 import SpotifyClientCredentials
 
 sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
