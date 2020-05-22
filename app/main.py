@@ -3,18 +3,9 @@ import requests
 from fastapi import FastAPI
 from app.core.config import settings
 from spotipy.oauth2 import SpotifyClientCredentials
+from app.services.openweather import openweather_service
 
 sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
-
-def get_city_temperature(city):
-    app_id = settings.OPENWEATHER_API_KEY
-    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={app_id}&units=metric'
-
-    response = requests.get(url)
-
-    response_json = response.json()
-
-    return response_json['main']['temp']
 
 
 def get_track_name(item):
@@ -22,13 +13,16 @@ def get_track_name(item):
 
 
 def get_temperature_playlist(temperature):
-    playlists = get_temperature_playlists(temperature)
+    try:
+        playlists = get_temperature_playlists(temperature)
 
-    first_playlist = playlists['playlists']['items'][0]
+        playlist_tracks = sp.playlist_tracks(
+            playlists['playlists']['items'][0]['id']
+        )
 
-    playlist_tracks = sp.playlist_tracks(first_playlist['id'])
-
-    return list(map(get_track_name, playlist_tracks['items']))
+        return list(map(get_track_name, playlist_tracks['items']))
+    except Exception as er:
+        return []
 
 def get_temperature_playlists(temperature):
     if temperature > 25:
@@ -45,7 +39,7 @@ app = FastAPI(title=settings.PROJECT_NAME)
 
 @app.get('/cities/{city}/playlists')
 def city_playlists(city):
-    city_temperature = get_city_temperature(city)
+    city_temperature = openweather_service.get_temperature(city)
 
     playlist = get_temperature_playlist(city_temperature)
     
