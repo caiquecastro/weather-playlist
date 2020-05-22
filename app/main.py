@@ -7,7 +7,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
 
 def get_city_temperature(city):
-    app_id = ''
+    app_id = settings.OPENWEATHER_API_KEY
     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={app_id}&units=metric'
 
     response = requests.get(url)
