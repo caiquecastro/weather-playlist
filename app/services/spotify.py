@@ -25,7 +25,7 @@ class SpotifyService:
                 playlists['playlists']['items'][0]['id']
             )
 
-            return list(map(get_track_name, playlist_tracks['items']))
+            return list(map(self.get_track_name, playlist_tracks['items']))
         except Exception as er:
             return []
 
