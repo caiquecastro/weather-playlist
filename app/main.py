@@ -40,7 +40,7 @@ def get_temperature_playlists(temperature):
     return sp.category_playlists('classical')
 
 
-app = FastAPI()
+app = FastAPI(title=settings.PROJECT_NAME)
 
 
 @app.get('/cities/{city}/playlists')
