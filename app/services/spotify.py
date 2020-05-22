@@ -1,17 +1,16 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
+
 class SpotifyService:
     def __init__(self):
-        self.client = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
-
-    def _get_track_name(self, item):
-        return item['track']['name']
+        credentials = SpotifyClientCredentials()
+        self.client = spotipy.Spotify(client_credentials_manager=credentials)
 
     def _get_temperature_playlists(self, temperature):
         if temperature > 25:
             return self.client.category_playlists('pop')
-        
+
         if temperature >= 10:
             return self.client.category_playlists('rock')
 
@@ -25,8 +24,12 @@ class SpotifyService:
                 playlists['playlists']['items'][0]['id']
             )
 
-            return list(map(self.get_track_name, playlist_tracks['items']))
+            return [{
+                'name': item['track']['name'],
+                'track': item['track'],
+            } for item in playlist_tracks['items']]
         except Exception as er:
             return []
+
 
 spotify_service = SpotifyService()
