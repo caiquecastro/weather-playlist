@@ -9,5 +9,7 @@ class Settings(BaseSettings):
     OPENWEATHER_API_KEY: str
     OPENWEATHER_UNITS: str
 
+    SENTRY_DSN: str
+
 
 settings = Settings()
