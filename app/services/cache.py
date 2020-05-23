@@ -26,7 +26,6 @@ class Cache:
 
         return self.redis.set(key, json.dumps(value), ex=expire)
 
-
     def increment_by(self, key, amount, value):
         return self.redis.zincrby(key, amount, value)
 

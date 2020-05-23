@@ -1,4 +1,3 @@
-import json
 import spotipy
 import logging
 from .cache import cache
