@@ -14,6 +14,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      redis:
+        image: redis
+        ports:
+        - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
@@ -36,7 +47,7 @@ jobs:
       run: |
         pytest
       env:
-        REDIS_URL: ''
+        REDIS_URL: 'redis://localhost'
         OPENWEATHER_API_KEY: ''
         OPENWEATHER_UNITS: ''
         SENTRY_DSN: ''
