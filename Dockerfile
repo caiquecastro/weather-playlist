@@ -1,4 +1,7 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
+FROM tiangolo/uvicorn-gunicorn:python3.8
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 COPY requirements.txt /app
 
