@@ -1,6 +1,7 @@
 import requests
 from .cache import cache
 from ..core.config import settings
+from ..errors import NotFoundError
 
 
 class OpenWeatherService:
@@ -26,6 +27,9 @@ class OpenWeatherService:
         url = f'{self.endpoint}?q={location}&appid={self.app_id}&units=metric'
 
         response = requests.get(url)
+
+        if response.status_code == 404:
+            raise NotFoundError()
 
         response.raise_for_status()
 
