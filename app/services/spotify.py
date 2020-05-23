@@ -1,5 +1,5 @@
-import spotipy
 import logging
+import spotipy
 from .cache import cache
 from spotipy.oauth2 import SpotifyClientCredentials
 
