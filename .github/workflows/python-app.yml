@@ -35,3 +35,8 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+      env:
+        REDIS_URL: ''
+        OPENWEATHER_API_KEY: ''
+        OPENWEATHER_UNITS: ''
+        SENTRY_DSN: ''
