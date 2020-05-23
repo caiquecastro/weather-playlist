@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from app.errors import AppError
@@ -5,6 +6,7 @@ from app.core.config import settings
 from app.services.stats import stats_service
 from app.services.spotify import spotify_service
 from app.services.openweather import openweather_service
+from app.models import CityPlaylist, CityStats, Error
 
 
 def create_app():
@@ -19,12 +21,21 @@ def create_app():
             }
         )
 
-    @app.get('/stats')
+    @app.get('/stats', response_model=List[CityStats])
     def city_stats():
         return stats_service.top_access()
 
-    @app.get('/cities/{city}/playlists')
-    def city_playlists(city):
+    @app.get(
+        '/cities/{city}/playlists',
+        response_model=CityPlaylist,
+        responses={
+            404: {
+                'description': 'Resource not found',
+                'model': Error,
+            },
+        },
+    )
+    def city_playlists(city: str):
         temperature = openweather_service.get_temperature(city)
 
         playlist = spotify_service.get_playlist_for_temperature(temperature)

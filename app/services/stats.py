@@ -6,7 +6,10 @@ class Stats:
         cache.increment_by('access', 1, city)
 
     def top_access(self):
-        return cache.get_range('access', 0, -1)
+        return [{
+            'city': city['key'],
+            'visits': city['value'],
+        } for city in cache.get_range('access', 0, -1)]
 
 
 stats_service = Stats()
