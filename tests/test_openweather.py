@@ -1,5 +1,5 @@
 import responses
-from .openweather import OpenWeatherService
+from app.services.openweather import OpenWeatherService
 
 class FakeCache:
     def __init__(self):
