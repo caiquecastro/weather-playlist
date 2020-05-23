@@ -1,7 +1,7 @@
 requests==2.23.0
 spotipy==2.12.0
-gunicorn
-uvicorn
-fastapi==0.54.1
-redis
+gunicorn==20.0.4
+uvicorn==0.11.3
+fastapi==0.54.2
+redis==3.5.2
 sentry-sdk==0.14.4

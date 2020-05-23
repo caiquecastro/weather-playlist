@@ -6,4 +6,3 @@ from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 sentry_sdk.init(dsn=settings.SENTRY_DSN)
 
 app = SentryAsgiMiddleware(create_app())
-
