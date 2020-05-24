@@ -7,7 +7,6 @@ class Settings(BaseSettings):
     REDIS_URL: str
 
     OPENWEATHER_API_KEY: str
-    OPENWEATHER_UNITS: str
 
     SENTRY_DSN: str
 
