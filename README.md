@@ -21,7 +21,20 @@ GET /stats                          - Service stats
 
 ## Architecture
 
+This webservice uses two external services. We need to ensure not to exceed their API calls.
+Considering that the temperature for a city does not suddenly change we can cache its value
+for a time. We are caching it for one hour. The same applies for the playlist for a genre.
+
+```
+--------------------    ----------------------    -----------------------     ------------------------
+|                  |    |  This application  |    |                     |     |                      |
+| Browser (Client) | -> |     App Server     | -> |    Cache (Redis)    |  -> |   External Service   |
+|                  |    | (weather playlist) |    |                     |     |                      |
+--------------------    ----------------------    -----------------------     ------------------------
+
+```
 
 ## TODO
 
 - Improve docs
+- Rate Limit
