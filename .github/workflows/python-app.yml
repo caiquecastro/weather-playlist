@@ -49,5 +49,4 @@ jobs:
       env:
         REDIS_URL: 'redis://localhost'
         OPENWEATHER_API_KEY: ''
-        OPENWEATHER_UNITS: ''
         SENTRY_DSN: ''
